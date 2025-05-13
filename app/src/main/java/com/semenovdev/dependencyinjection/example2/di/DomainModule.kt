@@ -4,11 +4,12 @@ import com.semenovdev.dependencyinjection.example2.data.repository.ExampleReposi
 import com.semenovdev.dependencyinjection.example2.domain.ExampleRepository
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 
 
 @Module
-abstract class DomainModule {
+class DomainModule {
 
-    @Binds
-    abstract fun bindRepository ( impl: ExampleRepositoryImpl ): ExampleRepository
+    @Provides
+    fun bindRepository ( impl: ExampleRepositoryImpl ): ExampleRepository { return impl }
 }

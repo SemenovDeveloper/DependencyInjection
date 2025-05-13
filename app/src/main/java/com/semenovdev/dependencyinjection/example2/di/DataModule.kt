@@ -1,22 +1,33 @@
 package com.semenovdev.dependencyinjection.example2.di
 
+import android.content.Context
 import com.semenovdev.dependencyinjection.example2.data.datasource.ExampleLocalDataSource
 import com.semenovdev.dependencyinjection.example2.data.datasource.ExampleLocalDataSourceImpl
 import com.semenovdev.dependencyinjection.example2.data.datasource.ExampleRemoteDataSource
 import com.semenovdev.dependencyinjection.example2.data.datasource.ExampleRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 
 @Module
-interface DataModule {
+class DataModule(private val context: Context) {
 
-    @Binds
-    fun bindExampleLocalDataSource(
+    @Provides
+    fun provideContext(): Context {
+        return context
+    }
+
+    @Provides
+    fun provideExampleLocalDataSource(
         impl: ExampleLocalDataSourceImpl
-    ): ExampleLocalDataSource
+    ): ExampleLocalDataSource {
+        return impl
+    }
 
-    @Binds
-    fun bindExampleRemoteDataSource(
+    @Provides
+    fun provideExampleRemoteDataSource(
         impl: ExampleRemoteDataSourceImpl
-    ): ExampleRemoteDataSource
+    ): ExampleRemoteDataSource {
+        return impl
+    }
 }
