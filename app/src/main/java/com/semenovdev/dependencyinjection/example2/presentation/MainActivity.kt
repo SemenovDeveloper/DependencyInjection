@@ -6,9 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.semenovdev.dependencyinjection.R
-import com.semenovdev.dependencyinjection.example1.Activity
+import com.semenovdev.dependencyinjection.example2.di.DaggerApplicationComponent
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var viewModel: ExampleViewModel
+
+    private val component = DaggerApplicationComponent.create()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -18,7 +24,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val activity = Activity()
-        activity.computer.toString()
+        component.inject(this)
+        viewModel.method()
+
     }
 }
