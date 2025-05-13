@@ -6,9 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.semenovdev.dependencyinjection.R
+import com.semenovdev.dependencyinjection.example2.di.ContextModule
 import com.semenovdev.dependencyinjection.example2.di.DaggerApplicationComponent
-import com.semenovdev.dependencyinjection.example2.di.DataModule
-import com.semenovdev.dependencyinjection.example2.di.DomainModule
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -18,8 +17,7 @@ class MainActivity : AppCompatActivity() {
     private val component by lazy {
         DaggerApplicationComponent
             .builder()
-            .dataModule(DataModule(this))
-            .domainModule(DomainModule(this))
+            .contextModule(ContextModule(application))
             .build()
     }
 
